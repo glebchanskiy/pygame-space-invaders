@@ -1,0 +1,13 @@
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
+**/__pycache__
+
+.idea
+.vscode
+
+cmake-build-debug
+cmake-build
+build
+target
+
