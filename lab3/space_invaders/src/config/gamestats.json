@@ -1,24 +1,109 @@
 {
     "best_scores": [
         {
-            "name": "player1",
-            "score": 23,
-            "datetime": "2432424324"
+            "name": "gleb",
+            "score": 97,
+            "datetime": "2023-02-27 07:38:05"
         },
         {
-            "name": "player2",
-            "score": 34,
-            "datetime": "2432424324"
+            "name": "gleb",
+            "score": 23,
+            "datetime": "2023-02-27 07:39:28"
+        },
+        {
+            "name": "sfsdf",
+            "score": 89,
+            "datetime": "2023-02-27 09:08:14"
+        },
+        {
+            "name": "gleb2",
+            "score": 100,
+            "datetime": "2023-02-27 09:09:54"
         },
         {
             "name": "gleb",
             "score": 97,
-            "datetime": "2023-02-27 07:38:05.770643"
+            "datetime": "2023-02-27 07:38:05"
         },
         {
             "name": "gleb",
-            "score": 200,
-            "datetime": "2023-02-27 07:39:28.161858"
+            "score": 23,
+            "datetime": "2023-02-27 07:39:28"
+        },
+        {
+            "name": "sfsdf",
+            "score": 89,
+            "datetime": "2023-02-27 09:08:14"
+        },
+        {
+            "name": "gleb2",
+            "score": 100,
+            "datetime": "2023-02-27 09:09:54"
+        },
+        {
+            "name": "gleb",
+            "score": 97,
+            "datetime": "2023-02-27 07:38:05"
+        },
+        {
+            "name": "gleb",
+            "score": 23,
+            "datetime": "2023-02-27 07:39:28"
+        },
+        {
+            "name": "sfsdf",
+            "score": 89,
+            "datetime": "2023-02-27 09:08:14"
+        },
+        {
+            "name": "gleb2",
+            "score": 100,
+            "datetime": "2023-02-27 09:09:54"
+        },
+        {
+            "name": "gleb",
+            "score": 97,
+            "datetime": "2023-02-27 07:38:05"
+        },
+        {
+            "name": "gleb",
+            "score": 23,
+            "datetime": "2023-02-27 07:39:28"
+        },
+        {
+            "name": "sfsdf",
+            "score": 89,
+            "datetime": "2023-02-27 09:08:14"
+        },
+        {
+            "name": "gleb2",
+            "score": 100,
+            "datetime": "2023-02-27 09:09:54"
+        },
+        {
+            "name": "gleb",
+            "score": 97,
+            "datetime": "2023-02-27 07:38:05"
+        },
+        {
+            "name": "gleb",
+            "score": 23,
+            "datetime": "2023-02-27 07:39:28"
+        },
+        {
+            "name": "sfsdf",
+            "score": 89,
+            "datetime": "2023-02-27 09:08:14"
+        },
+        {
+            "name": "gleb2",
+            "score": 100,
+            "datetime": "2023-02-27 09:09:54"
+        },
+        {
+            "name": "omogus",
+            "score": 1030,
+            "datetime": "02-27-2023 10:17:11"
         }
     ]
 }

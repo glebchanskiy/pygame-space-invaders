@@ -40,14 +40,16 @@ class AlienInvasion:
 
         self.isTheWARUDO = 1
         self.game_active = True
+    
+        self.start_menu = None
 
     def run_game(self):
         self.stats.reset_stats()
-        self._create_start_menu().mainloop(self.screen)
+        self.start_menu = self._create_start_menu()
+        self.start_menu.mainloop(self.screen)
 
     def end_game(self):
         self._create_end_menu().mainloop(self.screen)
-        
 
     def loop(self):
         self.start_music.play()
@@ -83,7 +85,6 @@ class AlienInvasion:
                 self.settings.alien_speed = 4
                 self.settings.bullet_speed = 10
             self.isTheWARUDO = -self.isTheWARUDO
-            
         elif event.key == pygame.K_1:
             self.background.change_bg(0)
         elif event.key == pygame.K_2:
@@ -196,15 +197,15 @@ class AlienInvasion:
         # Создание пришельца.
         for row_number in range(3):
             for alien_number in range(5):
-                self._create_alien(alien_number, row_number)
+                self._create_alien(alien_number, row_number, 'green')
 
-    def _create_alien(self, alien_number, row_number):
+    def _create_alien(self, alien_number, row_number, color):
         if row_number == 0:
-            alien = Alien(self, 'dreadnought')
+            alien = Alien(self, 'dreadnought', color)
         elif row_number == 1:
-            alien = Alien(self, 'attack')
+            alien = Alien(self, 'attack', color)
         elif row_number == 2:
-            alien = Alien(self, 'heavy')
+            alien = Alien(self, 'heavy', color)
 
         alien_width, alien_height = alien.rect.size
         alien.x = 20 + 1.3 * alien_width * alien_number
@@ -271,13 +272,53 @@ class AlienInvasion:
 
         start_menu.add.button('Play', self.loop)
         start_menu.add.selector(
-            'Difficulty :', [('Tests', 10),('Hard', 2), ('Easy', 1)],
+            'Difficulty :', [('Tests', 10), ('Hard', 2), ('Easy', 1)],
             onchange=self._set_difficulty)
-        start_menu.add.button('Records table', self.loop)
-        start_menu.add.button('Help', self.loop)
+        start_menu.add.button('Records table', self._set_records_table_screen)
+        start_menu.add.button('Help', self._set_help_screen)
         start_menu.add.button('Quit', pygame_menu.events.EXIT)
         start_menu.set_sound(self._make_menu_sounds_engin(), recursive=True)
         return start_menu
+
+    def _set_records_table_screen(self):
+        self.start_menu = self._create_records_table_menu()
+        self.start_menu.mainloop(self.screen)
+
+    def _create_records_table_menu(self):
+        records_menu = pygame_menu.Menu(
+            'Records table',
+            self.settings.screen_width,
+            self.settings.screen_height,
+            theme=mytheme)
+
+        records_menu.add.button('Back', self.run_game)
+        for record in self.stats.best_scores['best_scores']:
+            records_menu.add.label(
+                f"{record['datetime']} : {record['name']} : {record['score']}",
+                align=pygame_menu.locals.ALIGN_LEFT,
+                margin=(self.settings.screen_width // 4, 10)
+            )
+        return records_menu
+
+    def _set_help_screen(self):
+        self.start_menu = self._create_help_menu()
+        self.start_menu.mainloop(self.screen)
+
+    def _create_help_menu(self):
+        help_menu = pygame_menu.Menu(
+            'Help',
+            self.settings.screen_width,
+            self.settings.screen_height,
+            theme=mytheme)
+
+        help_menu.add.button('Back', self.run_game)
+
+        help_menu.add.label(
+            "Commodo aliqua elit aute sint officia excepteur enim \nnon cupidatat pariatur aliquip consequat. \nUllamco laborum eiusmod labore occaecat\nadipisicing nostrud tempor laborum tempor\nfugiat consectetur sunt. Ut irure incididunt \nconsectetur non culpa cillum nostrud enim irure\nvelit nisi aliqua.",
+            align=pygame_menu.locals.ALIGN_LEFT,
+            margin=(50, 10)
+        )
+        return help_menu
 
     def _create_end_menu(self):
         end_menu = pygame_menu.Menu(
@@ -286,15 +327,14 @@ class AlienInvasion:
             self.settings.screen_height,
             theme=mytheme)
         if self.stats.best_score < self.stats.score:
-            
             end_menu.add.label(f'New record!!!')
             end_menu.add.label(f'Your score: {self.stats.score}')
-            end_menu.add.text_input('Name:', default='player', onchange= self.stats.playerName)
+            end_menu.add.text_input(
+                'Name:', default='player', onchange=self.stats.playerName)
             end_menu.add.button('Save result', self.stats.set_record)
-
         else:
             end_menu.add.label(f'Your score: {self.stats.score}')
-        
+
         end_menu.add.button('Play again', self.run_game)
         end_menu.add.button('Records table', self.loop)
         end_menu.add.button('Quit', pygame_menu.events.EXIT)

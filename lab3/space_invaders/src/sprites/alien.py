@@ -6,7 +6,7 @@ from pygame.sprite import Sprite
 
 class Alien(Sprite):
 
-    def __init__(self, game, ship_type):
+    def __init__(self, game, ship_type, ship_color):
         super().__init__()
         self.screen = game.screen
         self.screen_rect = self.screen.get_rect()
@@ -15,13 +15,13 @@ class Alien(Sprite):
         self.type = ship_type
 
         if self.type == 'attack':
-            self.image = pygame.image.load(game.GAME_DIR + '/sprites/aliens/2.png')
+            self.image = pygame.image.load(game.GAME_DIR + f'/sprites/aliens/{ship_color}/2.png')
             self.cost = 2
         elif self.type == 'heavy':
-            self.image = pygame.image.load(game.GAME_DIR + '/sprites/aliens/1.png')
+            self.image = pygame.image.load(game.GAME_DIR + f'/sprites/aliens/{ship_color}/1.png')
             self.cost = 1
         elif self.type == 'dreadnought':
-            self.image = pygame.image.load(game.GAME_DIR + '/sprites/aliens/3.png')
+            self.image = pygame.image.load(game.GAME_DIR + f'/sprites/aliens/{ship_color}/3.png')
             self.cost = 3
 
         width, height = self.image.get_size()
