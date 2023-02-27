@@ -17,6 +17,7 @@ from lab3.space_invaders.src.sprites.background import Background
 from lab3.space_invaders.src.sprites.ship import Ship
 from lab3.space_invaders.src.sprites.bullet import Bullet
 from lab3.space_invaders.src.sprites.alien import Alien
+from lab3.space_invaders.src.sprites.explosion import Explosion
 
 
 class AlienInvasion:
@@ -62,6 +63,7 @@ class AlienInvasion:
                 self._update_bullets()
                 self._update_aliens()
                 self._update_message()
+                self._update_explosions()
 
             self._update_screen()
 
@@ -162,6 +164,16 @@ class AlienInvasion:
         self.screen.blit(score_text, (10, 10))
         self.screen.blit(wave_text, (10, 40))
 
+    def _update_explosions(self):
+        # self.aliens.update()
+        
+        for exp in self.explosions:
+            if exp.counter == 10:
+                self.explosions.remove(exp)
+            exp.update() 
+        for exp in self.explosions:
+            exp.blitme()
+
     def _update_screen(self):
         pygame.display.update()
 
@@ -173,6 +185,8 @@ class AlienInvasion:
             self.explousion_sound.play()
             for alien in groups:
                 self.stats.score += alien.cost
+                exp = Explosion(self, alien.rect.center)
+                self.explosions.add(exp)
 
         if not self.aliens:
             self._new_wave()
@@ -190,6 +204,7 @@ class AlienInvasion:
         self.background.change_bg(randint(0, 7))
 
         self.bullets.empty()
+        self.explosions.empty()
         self._create_fleet()
 
     def _create_fleet(self):
@@ -262,6 +277,7 @@ class AlienInvasion:
         self.background = Background(self, self.ship)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
+        self.explosions = pygame.sprite.Group()
 
     def _create_start_menu(self):
         start_menu = pygame_menu.Menu(
