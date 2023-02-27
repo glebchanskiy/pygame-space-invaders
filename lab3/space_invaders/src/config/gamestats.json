@@ -1,0 +1,24 @@
+{
+    "best_scores": [
+        {
+            "name": "player1",
+            "score": 23,
+            "datetime": "2432424324"
+        },
+        {
+            "name": "player2",
+            "score": 34,
+            "datetime": "2432424324"
+        },
+        {
+            "name": "gleb",
+            "score": 97,
+            "datetime": "2023-02-27 07:38:05.770643"
+        },
+        {
+            "name": "gleb",
+            "score": 200,
+            "datetime": "2023-02-27 07:39:28.161858"
+        }
+    ]
+}

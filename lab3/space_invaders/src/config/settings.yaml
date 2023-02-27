@@ -1,0 +1,6 @@
+ship_speed: 20
+ship_limit: 3
+bullet_speed: 10
+bullets_allowed: 5
+alien_speed: 5
+fleet_drop_speed: 10

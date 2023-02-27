@@ -11,7 +11,7 @@ from pygame.locals import *
 
 from lab3.space_invaders.src.menu_utils import mytheme
 from lab3.space_invaders.src.config.settings import Settings
-from lab3.space_invaders.src.gamestats import GameStats
+from lab3.space_invaders.src.config.gamestats import GameStats
 
 from lab3.space_invaders.src.sprites.background import Background
 from lab3.space_invaders.src.sprites.ship import Ship
@@ -83,7 +83,7 @@ class AlienInvasion:
                 self.settings.alien_speed = 4
                 self.settings.bullet_speed = 10
             self.isTheWARUDO = -self.isTheWARUDO
-
+            
         elif event.key == pygame.K_1:
             self.background.change_bg(0)
         elif event.key == pygame.K_2:
@@ -286,9 +286,12 @@ class AlienInvasion:
             self.settings.screen_height,
             theme=mytheme)
         if self.stats.best_score < self.stats.score:
+            
             end_menu.add.label(f'New record!!!')
             end_menu.add.label(f'Your score: {self.stats.score}')
-            end_menu.add.text_input('Name:')
+            end_menu.add.text_input('Name:', default='player', onchange= self.stats.playerName)
+            end_menu.add.button('Save result', self.stats.set_record)
+
         else:
             end_menu.add.label(f'Your score: {self.stats.score}')
         
