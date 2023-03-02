@@ -8,22 +8,23 @@ import pygame_menu
 from pygame_menu import sound
 from pygame.locals import *
 
-
 from lab3.space_invaders.src.menu_utils import mytheme
+
 from lab3.space_invaders.src.config.settings import Settings
 from lab3.space_invaders.src.config.gamestats import GameStats
 
 from lab3.space_invaders.src.sprites.background import Background
-from lab3.space_invaders.src.sprites.ship import Ship
-from lab3.space_invaders.src.sprites.bullet import Bullet
-from lab3.space_invaders.src.sprites.ship_rocket import Rocket
-from lab3.space_invaders.src.sprites.alien import Alien
+from lab3.space_invaders.src.sprites.explosion import Explosion
+
 from lab3.space_invaders.src.sprites.enemies.attacker import Attacker
 from lab3.space_invaders.src.sprites.enemies.defensor import Defensor
 from lab3.space_invaders.src.sprites.enemies.air_defensor import AirDefensor
 from lab3.space_invaders.src.sprites.enemies.dreadnought import Dreadnought
 from lab3.space_invaders.src.sprites.enemies.rocketer import Rocketer
-from lab3.space_invaders.src.sprites.explosion import Explosion
+
+from lab3.space_invaders.src.sprites.ship import Ship
+from lab3.space_invaders.src.sprites.bullet import Bullet
+from lab3.space_invaders.src.sprites.ship_rocket import Rocket
 
 
 class AlienInvasion:
@@ -34,40 +35,25 @@ class AlienInvasion:
         pygame.init()
         pygame.display.set_caption("Alien Invasion")
 
-        self._load_sounds()
         self.settings = Settings()
         self.stats = GameStats(self)
 
-        self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height)
-        )
+        self._load_sounds()
+
+        self.screen = pygame.display.set_mode(self.settings.screen_size)
 
         self._sprites_initializing()
         self._create_fleet(1)
 
+        self._prepare_rockets()
+        self._prepare_timestop()
 
-        # rockets 
-        self.rockets_reload_still = 0
-        self.rockets_reload_time = 300
-        self.rockets_alowed = 3
-        self.rockets_now = 3
-
-        # TheWarudo
-        self.isTheWARUDO = False
-        self.the_warudo_reload_still = 0
-        self.the_warudo_reload_time = 500
-        self.the_warudo_time = 50
-        self.time_befor_time_stop = 0
-        self.alien_bullet_speed_befor = 0
-        self.speed_befor = 0
-        self.bullet_speed_befor = 0
-        self.bullet_amount_befor = 0
         self.game_active = True
-
         self.menu = None
 
-
     def run_game(self):
+        self.stats.reset_stats()
+        self.settings.reset()
         self.menu = self._create_start_menu()
         self.menu.mainloop(self.screen)
 
@@ -76,12 +62,10 @@ class AlienInvasion:
         self.menu.mainloop(self.screen)
 
     def loop(self):
-        
-        self.stats.reset_stats()
-        self.settings.reset()
         self.start_music.play()
         while True:
-            print('Sprites active: ', len(self.weapons) + len(self.bullets) + len(self.aliens))
+            print('Sprites active: ', len(self.weapons) +
+                  len(self.bullets) + len(self.aliens))
             self._check_events()
 
             if self.game_active:
@@ -109,11 +93,10 @@ class AlienInvasion:
 
         self._check_background_change(event)
         self._check_ship_control(event)
- 
+
         if event.key == pygame.K_w:
             if not self.isTheWARUDO and self.the_warudo_reload_still == 0:
                 self.THE_WARUDO()
-        
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -157,7 +140,6 @@ class AlienInvasion:
         elif event.key == pygame.K_r:
             self._fire_rocket()
 
-
     def _update_bg(self):
         self.background.blitme()
         self.background.update()
@@ -179,14 +161,14 @@ class AlienInvasion:
         self._check_bullet_alien_collisions()
 
     def _update_aliens(self):
-        if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            self._ship_hit()
-
         self._check_aliens_bottom()
         self._check_fleet_edges()
 
         self.aliens.update()
         self.aliens.draw(self.screen)
+
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            self._ship_hit()
 
     def _update_message(self):
         font = pygame.font.Font(None, 36)
@@ -209,12 +191,11 @@ class AlienInvasion:
         self.screen.blit(rockets, (10, 130))
 
     def _update_explosions(self):
-        # self.aliens.update()
-
         for exp in self.explosions:
             if exp.counter == exp.last:
                 self.explosions.remove(exp)
             exp.update()
+
         for exp in self.explosions:
             exp.blitme()
 
@@ -224,7 +205,6 @@ class AlienInvasion:
         if self.isTheWARUDO:
             if self.time_befor_time_stop == self.the_warudo_time:
                 self.UN_THE_WARUDO()
-            # pygame.draw.rect(self.screen, (169,169,169, 160), pygame.Rect(0, 0, self.settings.screen_width, self.settings.screen_height))
             self.time_befor_time_stop += 1
 
     def _update_rockets(self):
@@ -233,11 +213,6 @@ class AlienInvasion:
             self.rockets_can_fire = False
         else:
             self.rockets_can_fire = True
-        # elif self.rockets_reload_still == 0 and self.rockets_now == 0: 
-        #     print("RELOOOAD")
-        #     self.rockets_now = self.rockets_alowed
-      
-
 
     def _update_screen(self):
         pygame.display.update()
@@ -250,10 +225,7 @@ class AlienInvasion:
             self.bullets, self.weapons, True, False)
 
         if pygame.sprite.spritecollideany(self.ship, self.weapons):
-            # self.explosions.add(Explosion(self, self.ship.rect.center))
             self._ship_hit()
-
-        # print(self.weapons)
 
         for groups in collisions.values():
             for alien in groups:
@@ -281,7 +253,6 @@ class AlienInvasion:
         if self.rockets_now == 0:
             self.rockets_reload_still = self.rockets_reload_time
             self.rockets_now = self.rockets_alowed
-            
 
     def _new_wave(self):
         self.stats.wave += 1
@@ -294,10 +265,6 @@ class AlienInvasion:
         self._create_fleet(self.stats.wave)
 
     def _create_fleet(self, wave_number):
-        """Создание флота вторжения."""
-        # Создание пришельца.
-        # for row_number in range(len(self.settings.waves['wave_1']['rows'])):
-
         if wave_number > 20:
             self._fleet_auto_gen()
             # self._fleet_debug_gen()
@@ -348,11 +315,10 @@ class AlienInvasion:
                 alien = AirDefensor(self, color)
             else:
                 alien = Dreadnought(self, color)
-                
-            
+
             alien.y = 20 + 90 * row_number
             alien.x = 20 + 80 * i
-            
+
             self.aliens.add(alien)
 
     def _check_fleet_edges(self):
@@ -370,7 +336,7 @@ class AlienInvasion:
 
     def _change_fleet_direction(self):
         for alien in self.aliens.sprites():
-            alien.y += self.settings.fleet_drop_speed
+            alien.y += self.settings.current_fleet_drop_speed
         self.settings.fleet_direction *= -1
 
     def _ship_hit(self):
@@ -386,12 +352,11 @@ class AlienInvasion:
         else:
             self.aliens.empty()
             self.bullets.empty()
-            # self.game_active = False
             self.end_game()
 
     def _load_sounds(self):
         pygame.mixer.music.load(f'{self.GAME_DIR}/music/main_theme.mp3')
-        # pygame.mixer.music.play(10000)
+        pygame.mixer.music.play(10000)
 
         self.start_music = pygame.mixer.Sound(
             f'{self.GAME_DIR}/music/start.mp3')
@@ -414,6 +379,23 @@ class AlienInvasion:
         self.weapons = pygame.sprite.Group()
         self.explosions = pygame.sprite.Group()
 
+    def _prepare_rockets(self):
+        self.rockets_reload_still = 0
+        self.rockets_reload_time = self.settings.rockets_reload_time
+        self.rockets_alowed = self.settings.rockets_alowed
+        self.rockets_now = 3
+
+    def _prepare_timestop(self):
+        self.isTheWARUDO = False
+        self.the_warudo_reload_still = 0
+        self.the_warudo_reload_time = self.settings.timestop_reload_time
+        self.the_warudo_time = self.settings.timestop_time
+        self.time_befor_time_stop = 0
+        self.alien_bullet_speed_befor = 0
+        self.speed_befor = 0
+        self.bullet_speed_befor = 0
+        self.bullet_amount_befor = 0
+
     def _create_start_menu(self):
         start_menu = pygame_menu.Menu(
             'Space Invaders',
@@ -423,7 +405,7 @@ class AlienInvasion:
 
         start_menu.add.button('Play', self.loop)
         start_menu.add.selector(
-            'Difficulty :', [('Tests', 10), ('Hard', 2), ('Easy', 1)],
+            'Difficulty :', [('Easy', 1), ('Hard', 2)],
             onchange=self._set_difficulty)
         start_menu.add.button('Records table', self._set_records_table_screen)
         start_menu.add.button('Help', self._set_help_screen)
@@ -447,7 +429,7 @@ class AlienInvasion:
             records_menu.add.label(
                 f"{record['datetime']} : {record['name']} : {record['score']}",
                 align=pygame_menu.locals.ALIGN_LEFT,
-                margin=(self.settings.screen_width // 4, 10)
+                margin=(self.settings.screen_width // 7, 10)
             )
         return records_menu
 
@@ -465,9 +447,9 @@ class AlienInvasion:
         help_menu.add.button('Back', self.run_game)
 
         help_menu.add.label(
-            "Commodo aliqua elit aute sint officia excepteur enim \nnon cupidatat pariatur aliquip consequat. \nUllamco laborum eiusmod labore occaecat\nadipisicing nostrud tempor laborum tempor\nfugiat consectetur sunt. Ut irure incididunt \nconsectetur non culpa cillum nostrud enim irure\nvelit nisi aliqua.",
+            self.settings.help_text,
             align=pygame_menu.locals.ALIGN_LEFT,
-            margin=(50, 10)
+            margin=(200, 10)
         )
         return help_menu
 
@@ -499,17 +481,16 @@ class AlienInvasion:
         return sounds_engine
 
     def _set_difficulty(self, value, difficulty):
-        self.settings.current_alien_speed = difficulty * 10
+        self.settings.current_alien_speed = difficulty * 5
         self.settings.difficulty_coof = difficulty * 2
 
     def THE_WARUDO(self):
-
         pygame.mixer.music.pause()
         self.time_resume.play()
 
         pygame.display.set_caption("THEE WARUUDOOO")
         self.bullet_amount_befor = self.settings.bullets_allowed
-        self.settings.bullets_allowed = 5
+        self.settings.bullets_allowed = self.settings.timestop_bullets_allowed
         self.alien_bullet_speed_befor = self.settings.alien_bullet_speed
         self.settings.alien_bullet_speed = 0
         self.speed_befor = self.settings.current_alien_speed

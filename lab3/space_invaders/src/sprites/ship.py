@@ -1,16 +1,14 @@
 import pygame
 
-# BASE_DIR = '/Users/glebchanskiy/subjects/pivo/sem4/lab3/'
-
-
 
 class Ship:
     def __init__(self, game) -> None:
         self.settings = game.settings
         self.screen = game.screen
         self.screen_rect = game.screen.get_rect()
-        
-        self.sprite_base = pygame.image.load(game.GAME_DIR + '/sprites/ship/starship.png')
+
+        self.sprite_base = pygame.image.load(
+            game.GAME_DIR + '/sprites/ship/starship.png')
         self.sprite_turn_right = [
             pygame.image.load(game.GAME_DIR + '/sprites/ship/turn_r_1.png'),
             pygame.image.load(game.GAME_DIR + '/sprites/ship/turn_r_2.png'),
@@ -24,13 +22,12 @@ class Ship:
             pygame.image.load(game.GAME_DIR + '/sprites/ship/turn_l_4.png'),
         ]
 
-
         sprite_width, sprite_height = self.sprite_base.get_size()
-        self.sprite = pygame.transform.scale(self.sprite_base, (sprite_width * 0.8, sprite_height * 0.8))
+        self.sprite = pygame.transform.scale(
+            self.sprite_base, (sprite_width * 0.8, sprite_height * 0.8))
 
         self.rect = self.sprite.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
-
 
         self.moving_up = False
         self.moving_down = False
@@ -56,7 +53,6 @@ class Ship:
         self.rect.y = self.y
         self.rect.x = self.x
 
-
         if self.moving_right:
             if self.moving_time == 1:
                 self.sprite = self.sprite_turn_right[0]
@@ -74,7 +70,7 @@ class Ship:
             if self.moving_time == -6:
                 self.sprite = self.sprite_turn_left[2]
             if self.moving_time > -6:
-                self.moving_time -= 1    
+                self.moving_time -= 1
         else:
             if self.moving_time > 0:
                 self.moving_time -= 1
@@ -83,7 +79,6 @@ class Ship:
             else:
                 self.sprite = self.sprite_base
 
-
     def blitme(self):
         self.screen.blit(self.sprite, self.rect)
 
@@ -91,6 +86,3 @@ class Ship:
         self.rect.midbottom = self.screen_rect.midbottom
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
-
-    # def kill(self):
-    #     self.sprite = None

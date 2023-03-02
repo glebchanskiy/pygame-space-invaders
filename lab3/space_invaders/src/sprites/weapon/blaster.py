@@ -2,9 +2,6 @@ import pygame
 from lab3.space_invaders.src.sprites.weapon.weapon import Weapon
 
 
-# BASE_DIR = '/Users/glebchanskiy/subjects/pivo/sem4/lab3/'
-
-
 class Blaster(Weapon):
     def __init__(self, game, enemy):
         super().__init__(game, enemy)
@@ -24,13 +21,10 @@ class Blaster(Weapon):
         self.rect = self.image.get_rect()
 
     def update(self):
-        # if self.rect.top > self.game.settings.screen_height:
-        #     self.rect.center = self.enemy.rect.center
-
         self.rect.y += self.settings.alien_bullet_speed
 
         self.counter += 1
-   
+
         if not self.screen_rect.contains(self.rect):
             self.kill()
 

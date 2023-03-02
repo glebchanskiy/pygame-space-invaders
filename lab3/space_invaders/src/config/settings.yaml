@@ -6,11 +6,37 @@ bullets_allowed: 1
 alien_speed: 5
 fleet_drop_speed: 10
 
+timestop_time: 70
+timestop_reload_time: 450
+timestop_bullets_allowed: 10
+
+rockets_alowed: 3
+rockets_reload_time: 300
+
 attacker_cost: 1
 air_defensor_cost: 2
 defensor_cost: 2
 rocketer_cost: 3
 dreadnought_cost: 5
+help_text: |
+  The aliens moves both horizontally and 
+  vertically (approaching the ship). 
+  The ship can be controlled to shoot 
+  laser or rocket to destroy the aliens, 
+  while the aliens will randomly shoot 
+  towards the ship. If an alien is shot 
+  by the cannon, it is destroyed; 
+  if the cannon is shot, one life is lost.
+
+  Control:
+  ->        left move
+  <-        right move
+  space   shoot blaster
+  R         shoot rocket
+  W         use stopping time
+
+
+  
 
 waves:
   wave_1:

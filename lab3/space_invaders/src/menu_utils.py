@@ -19,7 +19,3 @@ mytheme.widget_font_size = 50
 mytheme.widget_font_color = color
 mytheme.selection_color = color
 mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_ADAPTIVE
-
-
-
-# sound_engine.set_sound(sound.SOUND_TYPE_OPEN_MENU, '')

@@ -1,7 +1,4 @@
-import pygame
 from pygame.sprite import Sprite
-
-# BASE_DIR = '/Users/glebchanskiy/subjects/pivo/sem4/lab3/'
 
 
 class Weapon(Sprite):

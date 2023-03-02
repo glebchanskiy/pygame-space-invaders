@@ -1,7 +1,4 @@
 import pygame
-# from lab3.alieninvasion import AlienInvasion
-
-# BASE_DIR = '/Users/glebchanskiy/subjects/pivo/sem4/lab3/backgrounds/'
 
 
 class Background:
@@ -14,10 +11,14 @@ class Background:
         sprites_rects = []
 
         for bg in bgs:
-            sprite1 = pygame.image.load(f'{game_path}/sprites/backgrounds/{bg}/1.png')
-            sprite2 = pygame.image.load(f'{game_path}/sprites/backgrounds/{bg}/2.png')
-            sprite3 = pygame.image.load(f'{game_path}/sprites/backgrounds/{bg}/3.png')
-            sprite4 = pygame.image.load(f'{game_path}/sprites/backgrounds/{bg}/4.png')
+            sprite1 = pygame.image.load(
+                f'{game_path}/sprites/backgrounds/{bg}/1.png')
+            sprite2 = pygame.image.load(
+                f'{game_path}/sprites/backgrounds/{bg}/2.png')
+            sprite3 = pygame.image.load(
+                f'{game_path}/sprites/backgrounds/{bg}/3.png')
+            sprite4 = pygame.image.load(
+                f'{game_path}/sprites/backgrounds/{bg}/4.png')
 
             width, height = sprite1.get_size()
             width *= 2.6

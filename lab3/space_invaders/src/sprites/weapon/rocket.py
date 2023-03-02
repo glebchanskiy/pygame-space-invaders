@@ -2,8 +2,6 @@ import pygame
 from lab3.space_invaders.src.sprites.weapon.weapon import Weapon
 from math import sqrt
 
-# BASE_DIR = '/Users/glebchanskiy/subjects/pivo/sem4/lab3/'
-
 
 class Rocket(Weapon):
     def __init__(self, game, enemy):

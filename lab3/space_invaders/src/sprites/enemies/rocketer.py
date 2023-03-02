@@ -2,6 +2,7 @@ import pygame
 from lab3.space_invaders.src.sprites.enemies.enemy import Enemy
 from lab3.space_invaders.src.sprites.weapon.rocket import Rocket
 
+
 class Rocketer(Enemy):
     def __init__(self, game, color):
         super().__init__(game, Rocket(game, self))

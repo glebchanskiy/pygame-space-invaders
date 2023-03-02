@@ -2,6 +2,7 @@ import pygame
 from lab3.space_invaders.src.sprites.enemies.enemy import Enemy
 from lab3.space_invaders.src.sprites.weapon.laser import Laser
 
+
 class Dreadnought(Enemy):
     def __init__(self, game, color):
         super().__init__(game, Laser(game, self))
