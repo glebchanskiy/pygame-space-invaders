@@ -29,4 +29,3 @@ poetry run game
 ## Dependencies
 
 - poetry
-- docker
