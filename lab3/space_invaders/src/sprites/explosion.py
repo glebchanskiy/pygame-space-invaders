@@ -14,6 +14,7 @@ class Explosion(Sprite):
 
 
         self.counter = 0
+        self.last = 20
 
         self.ex1 = pygame.image.load(game.GAME_DIR + '/sprites/explosion/1.png')
         self.ex2 = pygame.image.load(game.GAME_DIR + '/sprites/explosion/2.png')
@@ -49,28 +50,27 @@ class Explosion(Sprite):
     
 
     def update(self):
-        print("UPDATE")
         if self.counter == 0:
             self.image = self.ex1
-        if self.counter == 1:
-            self.image = self.ex2
         if self.counter == 2:
-            self.image = self.ex3
-        if self.counter == 3:
-            self.image = self.ex4
+            self.image = self.ex2
         if self.counter == 4:
-            self.image = self.ex5
-        if self.counter == 5:
-            self.image = self.ex6
+            self.image = self.ex3
         if self.counter == 6:
-            self.image = self.ex7
-        if self.counter == 7:
-            self.image = self.ex8
+            self.image = self.ex4
         if self.counter == 8:
+            self.image = self.ex5
+        if self.counter == 10:
+            self.image = self.ex6
+        if self.counter == 12:
+            self.image = self.ex7
+        if self.counter == 14:
+            self.image = self.ex8
+        if self.counter == 16:
             self.image = self.ex9
-        if self.counter == 9:
+        if self.counter == 18:
             self.image = self.ex10
-        if self.counter == 11:
+        if self.counter == 20:
             self.image = self.ex1
          
         self.counter += 1

@@ -1,6 +1,158 @@
 ship_speed: 20
 ship_limit: 3
-bullet_speed: 10
-bullets_allowed: 50
+bullet_speed: 20
+alien_bullet_speed: 10
+bullets_allowed: 1
 alien_speed: 5
 fleet_drop_speed: 10
+
+attacker_cost: 1
+air_defensor_cost: 2
+defensor_cost: 2
+rocketer_cost: 3
+dreadnought_cost: 5
+
+waves:
+  wave_1:
+      alien_in_row: 2
+      rows:
+        - { type: attack, color: red }
+        - { type: attack, color: blue }
+  wave_2:
+      alien_in_row: 2
+      rows:
+        - { type: rocketer, color: green }
+        - { type: attack, color: yellow }
+  wave_3:
+      alien_in_row: 3
+      rows:
+        - { type: rocketer, color: blue }
+        - { type: heavy, color: red }
+  wave_4:
+      alien_in_row: 3
+      rows:
+        - { type: attack, color: orange }
+        - { type: rocketer, color: yellow }
+        - { type: heavy, color: red }
+  wave_5:
+      alien_in_row: 3
+      rows:
+        - { type: rocketer, color: orange }
+        - { type: rocketer, color: orange }
+        - { type: heavy, color: yellow }
+  wave_6:
+      alien_in_row: 4
+      rows:
+        - { type: rocketer, color: orange }
+        - { type: heavy, color: green }
+  wave_7:
+      alien_in_row: 4
+      rows:
+        - { type: pvo, color: green }
+        - { type: attack, color: green }
+        - { type: attack, color: blue }
+
+  wave_8:
+      alien_in_row: 3
+      rows:
+        - { type: dreadnought, color: red }
+        - { type: attack, color: green }
+        - { type: heavy, color: red }
+  wave_9:
+      alien_in_row: 4
+      rows:
+        - { type: dreadnought, color: blue }
+        - { type: heavy, color: red }
+        - { type: heavy, color: yellow }
+  wave_10:
+      alien_in_row: 3
+      rows:
+        - { type: dreadnought, color: red }
+        - { type: pvo, color: orange }
+        - { type: rocketer, color: green }
+        - { type: attack, color: blue }
+
+  wave_10:
+      alien_in_row: 4
+      rows:
+        - { type: dreadnought, color: yellow }
+        - { type: rocketer, color: orange }
+        - { type: rocketer, color: green }
+        - { type: heavy, color: blue }
+
+  wave_11:
+      alien_in_row: 5
+      rows:
+        - { type: pvo, color: orange }
+        - { type: rocketer, color: green }
+        - { type: attack, color: blue }
+        - { type: heavy, color: red } 
+  wave_12:
+      alien_in_row: 6
+      rows:
+        - { type: pvo, color: orange }
+        - { type: dreadnought, color: blue }
+        - { type: heavy, color: orange }
+
+  wave_13:
+      alien_in_row: 7
+      rows:
+        - { type: attack, color: orange }
+        - { type: attack, color: yellow }
+
+  wave_14:
+      alien_in_row: 7
+      rows:
+        - { type: pvo, color: red }
+        - { type: rocketer, color: green }
+        - { type: heavy, color: red } 
+  wave_15:
+      alien_in_row: 3
+      rows:
+        - { type: dreadnought, color: blue }
+        - { type: rocketer, color: orange }
+        - { type: rocketer, color: green }
+        - { type: heavy, color: red } 
+        
+  wave_16:
+      alien_in_row: 5
+      rows:
+        - { type: dreadnought, color: orange }
+        - { type: dreadnought, color: orange }
+        - { type: dreadnought, color: green }
+        - { type: dreadnought, color: blue }
+        - { type: dreadnought, color: red } 
+  wave_17:
+      alien_in_row: 5
+      rows:
+        - { type: dreadnought, color: orange }
+        - { type: heavy, color: orange }
+        - { type: rocketer, color: green }
+        - { type: attack, color: blue }
+        - { type: heavy, color: red }        
+  wave_18:
+      alien_in_row: 5
+      rows:
+        - { type: dreadnought, color: orange }
+        - { type: heavy, color: orange }
+        - { type: rocketer, color: green }
+        - { type: attack, color: blue }
+        - { type: heavy, color: red }
+  wave_19:
+      alien_in_row: 5
+      rows:
+        - { type: dreadnought, color: orange }
+        - { type: heavy, color: orange }
+        - { type: rocketer, color: green }
+        - { type: attack, color: blue }
+        - { type: heavy, color: red } 
+  wave_20:
+      alien_in_row: 5
+      rows:
+        - { type: dreadnought, color: orange }
+        - { type: heavy, color: orange }
+        - { type: rocketer, color: green }
+        - { type: attack, color: blue }
+        - { type: heavy, color: red }  
+        
+        

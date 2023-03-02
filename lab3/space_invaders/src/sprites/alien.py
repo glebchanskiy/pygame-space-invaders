@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+from random import randint
 
 # BASE_DIR = '/Users/glebchanskiy/subjects/pivo/sem4/lab3/'
 
@@ -25,8 +26,8 @@ class Alien(Sprite):
             self.cost = 3
 
         width, height = self.image.get_size()
-        # width *= 2.
-        # height *= 2.6
+        width *= 0.8
+        height *= 0.8
 
         self.image = pygame.transform.scale(self.image, (width, width))
         self.rect = self.image.get_rect()
@@ -35,7 +36,14 @@ class Alien(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
+    def ability(self):
+        # if self.type == 'attack':
+        pass
+
+
     def update(self):
+        if randint(1, 20) == 15:
+            self.ability()
         self.x += self.settings.alien_speed * self.settings.fleet_direction
 
         self.rect.x = self.x

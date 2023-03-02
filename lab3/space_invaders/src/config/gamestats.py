@@ -30,8 +30,9 @@ class GameStats():
 
     def reset_stats(self):
         self.ships_left = self.settings.ship_limit
+        print(self.settings.ship_limit)
         self.score = 0
-        self.wave = 0
+        self.wave = 1
 
     def set_record(self):
         
