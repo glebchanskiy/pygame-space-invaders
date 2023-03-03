@@ -1,4 +1,4 @@
-# Pygame - Space Invaders - LR2
+# Pygame - Space Invaders - LR3
 
 ## Install
 
